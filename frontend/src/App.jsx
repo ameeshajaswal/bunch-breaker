@@ -9,7 +9,7 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({ iconUrl: markerIcon, shadowUrl: markerShadow });
 
-const API_BASE = 'http://localhost:8000/api';
+const API_BASE = 'https://bunch-breaker-production.up.railway.app/api';
 
 // Helper functions
 function severityColor(severity) {
