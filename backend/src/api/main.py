@@ -17,9 +17,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-DB_PATH = Path("data/processed/hotspots.db")
-EQUITY_PATH = Path("data/processed/income_quartiles.csv")
-
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent  # goes up to /app
+DB_PATH = BASE_DIR / "data/processed/hotspots.db"
+EQUITY_PATH = BASE_DIR / "data/processed/income_quartiles.csv"
 def get_db_connection():
     return sqlite3.connect(DB_PATH)
 
