@@ -1,43 +1,6 @@
-# requirements.txt
-cat > requirements.txt << EOF
-# Data processing
-pandas>=2.0.0
-numpy>=1.24.0
-geopandas>=0.14.0
-shapely>=2.0.0
-
-# GTFS parsing
-gtfs-kit>=0.1.0
-partridge>=0.1.0
-
-# Optimization
-pulp>=2.7.0
-
-# API (for later)
-fastapi>=0.104.0
-uvicorn>=0.24.0
-
-# Jupyter (exploration)
-jupyter>=1.0.0
-matplotlib>=3.7.0
-folium>=0.15.0
-
-# Utility
-requests>=2.31.0
-python-dotenv>=1.0.0
-pyarrow>=14.0.0  # for Parquet
-EOF
-
-# Create initial commit
-#git add .
-#git commit -m "Initial project setup for Transit Data Challenge 2026"
-
-# Create GitHub repo (you need to do this manually on github.com first)
-# Then connect:
-# git remote add origin https://github.com/YOUR_USERNAME/transit-data-challenge-2026.git
-# git branch -M main
-# git push -u origin main
-
-#environment:  python -m venv venv
-#.\venv\Scripts\activate
-#deactivate
+fastapi
+uvicorn
+pandas
+numpy
+python-multipart
+pydantic
