@@ -1,4 +1,4 @@
-// frontend/src/App.jsx - COMPLETE VERSION WITH EQUITY STRATEGY
+// frontend/src/App.jsx - FIXED VERSION
 import { useState, useEffect } from 'react';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -247,17 +247,19 @@ export default function App() {
       .catch(err => console.error('Failed to load strategies:', err));
   }, []);
 
-  // Fetch data from backend
+  // Fetch data from backend - FIXED: ensure nSupervisors is a clean number
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
       setError(null);
       
       const peakOnly = timeFilter === 'peak';
+      // CRITICAL FIX: Ensure nSupervisors is a clean integer
+      const cleanNSupervisors = parseInt(nSupervisors, 10);
       
       try {
         const optRes = await fetch(
-          `${API_BASE}/optimize?n_supervisors=${nSupervisors}&strategy=${strategy}&peak_only=${peakOnly}`
+          `${API_BASE}/optimize?n_supervisors=${cleanNSupervisors}&strategy=${strategy}&peak_only=${peakOnly}`
         );
         if (!optRes.ok) throw new Error(`HTTP ${optRes.status}`);
         const optData = await optRes.json();
@@ -281,9 +283,14 @@ export default function App() {
     fetchData();
   }, [nSupervisors, strategy, timeFilter]);
 
-  // Update URL
+  // Update URL - FIXED: ensure clean value
   useEffect(() => {
-    const params = new URLSearchParams({ n: nSupervisors, strategy, time: timeFilter });
+    const cleanNSupervisors = parseInt(nSupervisors, 10);
+    const params = new URLSearchParams({ 
+      n: cleanNSupervisors.toString(), 
+      strategy, 
+      time: timeFilter 
+    });
     window.history.replaceState({}, '', `?${params}`);
   }, [nSupervisors, strategy, timeFilter]);
 
@@ -351,11 +358,11 @@ export default function App() {
           {/* Supervisor Slider */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 14, minWidth: 250 }}>
             <span style={{ fontSize: 10, color: mut }}>Supervisors</span>
-            <input type="range" min={1} max={10} value={nSupervisors} onChange={e => setNSupervisors(parseInt(e.target.value))} style={{ flex: 1 }} />
+            <input type="range" min={1} max={10} value={nSupervisors} onChange={e => setNSupervisors(parseInt(e.target.value, 10))} style={{ flex: 1 }} />
             <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 22, fontWeight: 500, color: accent }}>{nSupervisors}</span>
           </div>
 
-          {/* Strategy Dropdown - NOW WITH EQUITY OPTION */}
+          {/* Strategy Dropdown */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 260 }}>
             <span style={{ fontSize: 10, color: mut }}>Strategy</span>
             <select 
@@ -396,7 +403,7 @@ export default function App() {
       {/* Error Display */}
       {error && (
         <div style={{ background: '#ff444410', border: '1px solid #ff4444', margin: '10px 20px', padding: '10px', borderRadius: 4, color: '#ff8888', fontSize: 12 }}>
-          ⚠️ Error: {error}. Make sure backend is running on port 8000.
+          ⚠️ Error: {error}. Make sure backend is running.
         </div>
       )}
 
