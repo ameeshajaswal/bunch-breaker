@@ -1,11 +1,16 @@
 # Data files - NEVER upload to GitHub
-data/
-*.db
+# Data files - only commit processed db and equity data
+data/raw/
+data/synthetic/
 *.sqlite
 *.parquet
 *.csv
 *.zip
 *.geojson
+
+# Allow these specific files
+!data/processed/hotspots.db
+!data/processed/income_quartiles.csv
 
 # Python
 venv/
