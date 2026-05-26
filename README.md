@@ -39,7 +39,7 @@ The Bunch Breaker is an optimization tool that recommends exactly where to deplo
 - **Ameesha** (Student), Centennial College
 - **Mentor:** Mayy Habayeb, Centennial College
 
-[Watch the 3-minute demo](https://youtu.be/YOUR_VIDEO_LINK_HERE)
+[Watch the 3-minute demo]([https://youtu.be/YOUR_VIDEO_LINK_HERE](https://youtu.be/cCF-3LC5mxM))
 
 ### Setup Instructions
 
